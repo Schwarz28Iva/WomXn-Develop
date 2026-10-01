@@ -1,166 +1,66 @@
-# ReadAloud ðŸ“–ðŸ”Š
+# WomXn Develop - Ubisoft Programming Challenge (2021)
 
-A web application that transforms PDF documents into **editable text or spoken audio** through OCR and text-to-speech processing.
+> Archived learning project - my first game.
 
-ReadAloud combines a Flask backend with an interactive web interface and provides two main tools:
+A small 2D C++ game created in four weeks for the **Ubisoft WomXn Develop Programming Challenge** in 2021.
 
-- ðŸ”Ž **Enchanted Vision** â€” extracts editable text from scanned or image-based PDFs using OCR.
-- ðŸ”Š **Sorcerer's Voice** â€” converts uploaded PDF documents or directly entered text into speech.
+The project was developed with a proprietary Ubisoft API/framework provided for the challenge. That API and the original asset package are **not included** in this public repository.
 
-## Preview
-
-### Home
+## Project Preview
 
 <p align="center">
-  <img src="docs/screenshots/home.png" width="850" alt="ReadAloud homepage">
+  <img src="docs/screenshots/gameplay.png" width="900" alt="WomXn Develop gameplay screenshot">
 </p>
 
-### OCR — PDF to Editable Text
-
 <p align="center">
-  <img src="docs/screenshots/ocr-upload.png" width="45%" alt="PDF upload interface">
+  <img src="docs/screenshots/main-menu.jpg" width="48%" alt="Game main menu">
   &nbsp;&nbsp;
-  <img src="docs/screenshots/ocr-result.png" width="45%" alt="OCR extracted text">
+  <img src="docs/screenshots/leaderboard.png" width="48%" alt="Local leaderboard">
 </p>
 
-### Text-to-Speech
+## A 2021 Time Capsule
 
-<p align="center">
-  <img src="docs/screenshots/tts-input.png" width="45%" alt="Direct text input">
-  &nbsp;&nbsp;
-  <img src="docs/screenshots/tts-player.png" width="45%" alt="Generated audio player">
-</p>
+This was my first game and one of my earliest C++ projects. I built it before I had formally studied object-oriented programming in C++, so I spent much more time thinking about game design, mechanics, flow, and getting a complete playable experience working than about software architecture.
 
-## Features
+I would structure this code very differently today. The implementation reflects my experience and priorities at the time, and I am intentionally keeping the original version rather than rewriting history. Completing a playable game within the four-week challenge was a milestone I was genuinely proud of, and that is why this project still has a place on my GitHub.
 
-### ðŸ”Ž PDF â†’ Text
+## Technical Snapshot
 
-- Drag-and-drop PDF upload
-- PDF-to-image conversion
-- OCR with Tesseract
-- Extracted text displayed directly in the browser
-- Copy extracted text to clipboard
+| | |
+| --- | --- |
+| **Language** | C++ |
+| **Year** | 2021 |
+| **Context** | Ubisoft WomXn Develop Programming Challenge |
+| **Timebox** | 4 weeks |
+| **Focus** | Game design, gameplay mechanics, UI, scoring and power-ups |
+| **Public repository** | My authored game logic and project screenshots |
 
-### ðŸ”Š Text / PDF â†’ Speech
+## Gameplay I Implemented
 
-- Convert typed text to speech
-- Extract text from PDF documents
-- Generate audio using Google Cloud Text-to-Speech
-- Integrated HTML5 audio player
-- Download generated audio
+- **Player actions:** jump, attack and teleport-to-shadow mechanics
+- **Obstacles and enemies:** collision, damage and encounter logic
+- **Health system:** player health plus collectible hearts
+- **Power-ups:** Apollo and Ares abilities with separate progress systems
+- **Scrolling environment:** moving background and ground layers
+- **HUD:** health, power-up progress, game time and score
+- **Game flow:** main menu, pause, resume, restart, story, mythology and controller-guide screens
+- **Scoring and leaderboard:** score calculation and a local top-five leaderboard
 
-## Tech Stack
+## Repository Scope
 
-**Backend**
+This public repository intentionally contains only the code I authored for the game, centered around `GameTest.cpp`, plus screenshots documenting the original result.
 
-- Python
-- Flask
-- Flask-SocketIO
+The challenge project depended on Ubisoft's proprietary framework, including `app/app.h`, and on an asset package that I do not redistribute. Because those dependencies are not public, this repository is an **archive and code showcase**, not a standalone buildable version of the game.
 
-**Document Processing**
+The screenshots document how the original project looked when running in the challenge environment.
 
-- PyPDF2
-- Tesseract OCR
-- pdf2image
+## Looking Back
 
-**Text-to-Speech**
+If I were building the project today, I would:
 
-- Google Cloud Text-to-Speech API
+- separate game state, entities, UI and gameplay systems into clearer components and classes
+- reduce global state and raw-pointer usage
+- separate input, update and rendering responsibilities more cleanly
+- move gameplay constants and configuration out of the main implementation
 
-**Frontend**
-
-- HTML
-- CSS
-- JavaScript
-- Bootstrap
-- Socket.IO
-
-## Architecture
-
-```text
-                         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                         â”‚   ReadAloud   â”‚
-                         â”‚ Web Interface â”‚
-                         â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
-                                 â”‚
-                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-                    â”‚                         â”‚
-               OCR workflow              TTS workflow
-                    â”‚                         â”‚
-                 PDF input              Text / PDF input
-                    â”‚                         â”‚
-                 pdf2image                  PyPDF2
-                    â”‚                         â”‚
-                 Tesseract                    â”‚
-                    â”‚                         â”‚
-               Extracted text â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                    â”‚
-                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Google Cloud TTS
-                                           â”‚
-                                           â–¼
-                                       MP3 audio
-```
-
-## Running Locally
-
-### Requirements
-
-Besides the Python dependencies, the OCR functionality requires:
-
-- **Tesseract OCR**
-- **Poppler**
-- a **Google Cloud Text-to-Speech API key** for speech generation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Schwarz28Iva/ReadAloud-Document-Helper.git
-cd ReadAloud-Document-Helper
-```
-
-Install the Python dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Create a local `.env` file based on `.env.example`:
-
-```text
-GOOGLE_TTS_API_KEY=your_api_key_here
-```
-
-If Tesseract is not available on your PATH, also configure:
-
-```text
-TESSERACT_CMD=path_to_tesseract
-```
-
-Run the application:
-
-```bash
-python server.py
-```
-
-Then open the local address displayed by Flask in your browser.
-
-## Project Motivation
-
-ReadAloud was built as an exploration of document accessibility and transformation: making content available both as editable text and spoken audio through a single visual interface.
-
-The project also provided hands-on experience integrating document processing, OCR, external APIs, WebSockets, backend services, and frontend interaction into one end-to-end application.
-
-## Notes
-
-- Uploaded documents are processed by the application and are not intended to be committed to the repository.
-- Generated audio files are ignored by Git.
-- API keys and local environment settings belong in `.env`, which is ignored by Git.
-
-## Possible Improvements
-
-- Add automated tests for the processing services and API routes
-- Improve OCR language selection
-- Add configurable text-to-speech voices and languages
-- Improve accessibility and responsive behavior
-- Add deployment configuration for a hosted demo
-
+I have deliberately not refactored the original source so that the repository remains an honest snapshot of my early programming work and the progress I have made since then.
